@@ -202,7 +202,6 @@
     </div>
     <div class="contacts">
       <span>Serving Texas &amp; Regional Lanes</span>
-      <a href="https://www.tiktok.com/@rollinoak" target="_blank">TikTok @rollinoak</a>
     </div>
   </div>
 </div>
@@ -411,31 +410,24 @@
           <div class="value">Texas, USA</div>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">🎵</div>
-        <div>
-          <div class="label">TikTok</div>
-          <div class="value"><a href="https://www.tiktok.com/@rollinoak" target="_blank">@rollinoak</a></div>
-        </div>
-      </div>
     </div>
 
-    <form class="quote" action="mailto:rollingoakservices@gmail.com" method="post" enctype="text/plain">
+    <form class="quote" id="quote-form" action="/api/contact" method="post" autocomplete="on">
       <div class="field">
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="Name" required>
+        <input type="text" id="name" name="Name" autocomplete="name" required>
       </div>
       <div class="field">
         <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="Phone" required>
+        <input type="tel" id="phone" name="Phone" autocomplete="tel" required>
       </div>
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="Email" required>
+        <input type="email" id="email" name="Email" autocomplete="email" required>
       </div>
       <div class="field">
         <label for="type">I'm reaching out about</label>
-        <select id="type" name="Reason">
+        <select id="type" name="Reason" autocomplete="off">
           <option>Freight Quote</option>
           <option>Driving Position</option>
           <option>Owner-Operator Partnership</option>
@@ -446,7 +438,8 @@
         <label for="details">Details</label>
         <textarea id="details" name="Details" placeholder="Load details, driving experience, or your question..."></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Send</button>
+      <button type="submit" class="btn btn-primary" id="quote-submit">Send</button>
+      <p id="quote-status" role="status" style="margin-top:12px;font-size:0.95em;"></p>
     </form>
   </div>
 </section>
@@ -461,7 +454,6 @@
         </div>
         <p style="max-width:260px;">A Texas-based freight carrier focused on straightforward hauling and driver-first culture.</p>
         <div class="foot-social">
-          <a href="https://www.tiktok.com/@rollinoak" target="_blank">🎵</a>
           <a href="mailto:rollingoakservices@gmail.com">✉</a>
           <a href="tel:+12054203444">☎</a>
         </div>
@@ -529,6 +521,43 @@
     });
   }, { threshold: 0.5 });
   counters.forEach(el => countIo.observe(el));
+
+  // Quote/contact form: submit via fetch to the serverless API route
+  const quoteForm = document.getElementById('quote-form');
+  if (quoteForm) {
+    const statusEl = document.getElementById('quote-status');
+    const submitBtn = document.getElementById('quote-submit');
+    quoteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      statusEl.textContent = '';
+      statusEl.style.color = '';
+
+      const data = Object.fromEntries(new FormData(quoteForm).entries());
+
+      try {
+        const res = await fetch(quoteForm.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('Request failed');
+        statusEl.textContent = "Thanks — we've got your message and will be in touch shortly.";
+        statusEl.style.color = '#2e7d32';
+        quoteForm.reset();
+      } catch (err) {
+        statusEl.textContent = 'Something went wrong sending your message. Please call or text us directly instead.';
+        statusEl.style.color = '#c62828';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send';
+      }
+    });
+  }
 </script>
 
 </body>
