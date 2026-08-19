@@ -125,7 +125,7 @@
   .about p { color: var(--muted); margin-bottom: 16px; font-size: 16px; }
 
   /* Services strip */
-  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 24px; }
   .service-card { background: #fff; border: 1px solid #e7e5e0; border-radius: 10px; padding: 30px 22px; text-align: center; }
   .service-icon { width: 50px; height: 50px; margin: 0 auto 16px; background: rgba(242,112,28,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
   .service-card h3 { font-size: 16.5px; margin-bottom: 8px; }
@@ -216,7 +216,6 @@
         <li><a href="#about">About Us</a></li>
         <li><a href="#drivers">Careers</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="/blog/">Blog</a></li>
         <li><a href="#contact">Apply Now</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -355,6 +354,11 @@
         <h3>Expedited Freight</h3>
         <p>Time-sensitive loads handled with priority scheduling.</p>
       </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🚜</div>
+        <h3>Heavy Equipment Hauling</h3>
+        <p>Sourcing and transport for construction tractors, dozers, and premium heavy machinery through our trusted network.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -445,29 +449,6 @@
   </div>
 </section>
 
-<section id="blog-teaser" style="background:#f6f5f2;">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="section-tag">From The Blog</span>
-      <h2>Trucks For Sale &amp; Buying Guides</h2>
-      <p>We also sell CDL trucks with flexible financing. Read the latest listing below or see everything on the blog.</p>
-    </div>
-    <div style="max-width:720px;margin:0 auto;">
-      <a href="/blog/2022-kenworth-w900-for-sale-texas/" class="why-card reveal" style="display:flex;gap:22px;align-items:center;text-decoration:none;color:inherit;">
-        <img src="/blog/2022-kenworth-w900-for-sale-texas/2022-kenworth-w900-front.jpg" alt="2022 Kenworth W900 classic long-hood sleeper truck for sale" style="width:160px;height:120px;object-fit:cover;border-radius:8px;flex-shrink:0;">
-        <div>
-          <div style="color:var(--orange);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Trucks For Sale</div>
-          <h3 style="margin-bottom:6px;">2022 Kenworth W900 Classic Long-Hood Sleeper</h3>
-          <p style="margin:0;">$114,100 &middot; $11,410 down &middot; 375,000 mi &mdash; Kenworth's last W900 model year is 2026.</p>
-        </div>
-      </a>
-      <div style="text-align:center;margin-top:26px;">
-        <a href="/blog/" class="btn btn-primary btn-sm">Visit The Blog</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap">
     <div class="footer-grid">
@@ -488,7 +469,6 @@
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#drivers">Careers</a></li>
-          <li><a href="/blog/">Blog</a></li>
         </ul>
       </div>
       <div>
